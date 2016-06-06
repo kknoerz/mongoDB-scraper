@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Welcome to Smashing Magazine READ and WRITE</h1>
+  <h2>Where you can scrape articles from Smashing Magazine, jot down your thoughts, and save them for later.</h2>
+
+  <div id="results-container">
+    <p>Click Smashing Magazine below to get articles.</p>
+    <button id="get-smashed"><img src="https://media-mediatemple.netdna-ssl.com/wp-content/themes/smashing-magazine/assets/images/logo.png"></button>
+    <div id="results"></div>
+  </div>
+
+  <div id="note-container">
+      <p>Selected Article:</p>
+      <div id="article"></div>
+
+      <p>Title Your Note:</p>
+      <input type="text" id="title" />
+    <br>
+      <p>Write Your Note:</p>
+      <textarea id="note"></textarea>
+    <div id="buttons">
+      <div id="actionbutton">
+        <button id="makenew">Submit</button>
+      </div>
+      <button id="clearall">Delete All Notes</button>
+    </div>
+  </div>
+
+  <div id="note-bin">
+    <p>All Notes:</p>
+    <div id="all-notes"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

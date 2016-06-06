@@ -1,0 +1,114 @@
+body{
+  text-align: center;
+  background-color: #999;
+}
+
+#note-container {
+  margin: 20px;
+  width: 25%;
+  height: 620px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#article {
+  padding: 10px;
+  width: 296px;
+  min-height: 50px;
+  background-color: #f99c4d;
+  display: inline-block;
+  font-size: 1em;
+}
+
+#title {
+  width: 296px;
+}
+
+#get-smashed {
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+#results-container {
+  width: 25%;
+  margin: 20px;
+  display: inline-block;
+}
+
+#results{
+  background-color: #f99c4d;
+  width: 100%;
+  height:300px;
+  overflow: auto;
+  margin: 0 auto;
+}
+
+.smashing-article{
+  margin: 10px;
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+.smashing-article:hover{
+  background-color: aliceblue;
+}
+
+h1 {
+  font-size: 1em;
+  color:#ccc;
+}
+
+.smashing-content {
+  display: none;
+}
+
+
+.deleter{
+  cursor: pinter;
+  text-align:right;
+}
+
+.deleter{
+  color: red;
+  margin-left: 20px;
+}
+input{
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+  font-size: 1.5em;
+  height: 50px;
+  background-color: #f99c4d;
+}
+textarea{
+  padding: 10px;
+  width: 296px;
+  margin: 0 auto;
+  height: 135px;
+  font-size: 1em;
+  background-color: #f99c4d;
+
+}
+
+
+#actionbutton{
+  display: inline-block;
+}
+#buttons{
+  margin:20px;
+}
+#note-bin {
+  margin: 20px;
+  vertical-align: top;
+  display: inline-block;
+  width: 15%;
+}
+
+#all-notes {
+  padding: 10px;
+  height: 405px;
+  vertical-align: top;
+  background-color: #f99c4d;
+  margin: 10px;
+}
