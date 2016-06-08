@@ -14,18 +14,59 @@ app.use(express.static('public'));
 
 //Database configuration
 var mongojs = require('mongojs');
-var databaseUrl = "scraperDB";
-var collections = ["smashing", "notes"];
-var db = mongojs(databaseUrl, collections);
+// var databaseUrl = "scraperDB";
+// var collections = ["smashing", "notes"];
+// var db = mongojs(databaseUrl, collections);
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/scraperDB');
+var db = mongoose.connection;
 
-db.on('error', function(err) {
-  console.log('Database Error:', err);
+db.on('error', function (err) {
+	console.log('Mongoose Error: ', err);
+});
+db.once('open', function () {
+	console.log('Mongoose connection successful.');
 });
 
-// Routes
+var Note = require('./models/Note.js');
+var Article = require('./models/Article.js');
+
+app.get('/', function(req, res) {
+  res.send(index.html);
+});
+
+app.get('/scrape', function(req, res) {
+	mongoose.connection.db.dropCollection('articles', function(err, result){
+		console.log('articles cleared...');
+	});
+	request('https://www.smashingmagazine.com/', function(error, response, html) {
+		var $ = cheerio.load(html);
+		$('.post').each(function(i, element){
+
+			var result = {};
+
+			result.title = $(this).children().children().attr('property', 'name').text();
+			result.link = $(this).children().children().attr('href');
+			result.content = $(this).children().next().next().text();
+			result.content += $(this).children().next().next().next().next().text();
+
+
+			var entry = new Article (result);
+
+			entry.save(function(err, doc) {
+				if (err) {
+					console.log(err);
+				} else {
+					console.log(doc);
+				}
+			});
+		});
+	});
+	res.redirect('/');
+});
 
 app.get('/notes', function(req, res) {
-	db.notes.find({}, function(err, found) {
+	Note.find({}, function(err, found) {
 		if (err) {
 			console.log(err);
 		} else {
@@ -35,39 +76,11 @@ app.get('/notes', function(req, res) {
 	});
 });
 
-
-app.get('/scrape', function(req, res) {
-	console.log('inside scrape');
-	db.smashing.drop();
-	request('https://www.smashingmagazine.com/', function(error, response, html) {
-
-		var $ = cheerio.load(html);
-		var result = [];
-
-		$('.post').each(function(i, element){
-			var title = $(this).children().children().attr('property', 'name').text();
-			var link = $(this).children().children().attr('href');
-			var content = $(this).children().next().next().text();
-			content += $(this).children().next().next().next().next().text();
-
-
-				// console.log('title: ', title);
-				// console.log('link: ', link);
-				// console.log('content: ', content);
-			db.smashing.insert({
-				title:title,
-				link:link,
-				content:content
-			});
-		});
-	});
-	res.redirect('/');
-});
-
-// //Save to DB
 app.post('/submit', function(req, res) {
+	var newNote = new Note(req.body);
+	console.log('inside submit: ', req.body);
 
-	db.notes.save(req.body, function(err, saved) {
+	newNote.save(function(err, saved) {
 		console.log('req.body inside submit: ', req.body);
     if (err) {
       console.log(err);
@@ -78,36 +91,34 @@ app.post('/submit', function(req, res) {
   });
 	console.log("This is response inside submit: ", res.body);
 	// res.send()
-
 });
 
-//Get from DB
 
 
-app.get('/all', function(req, res) {
+app.get('/articles', function(req, res) {
 
-	db.smashing.find({}, function(err, found) {
+	Article.find({}, function(err, found) {
 		if (err) {
 			console.log(err);
 		} else {
-			res.json(found);
+			res.send(found);
 		}
 	});
 });
 
 
-//Find One in DB
+//Find note in DB
 app.get('/find/:id', function(req, res){
 
 	console.log(req.params.id);
-	db.notes.findOne({
+	Note.findOne({
 			'_id': mongojs.ObjectId(req.params.id)
 	}, function(err, found){
 			if (err) {
 					console.log(err);
 					res.send(err);
 			} else {
-					console.log(found);
+					console.log('inside find/:id: ', found);
 					res.send(found);
 			}
 	});
@@ -115,21 +126,20 @@ app.get('/find/:id', function(req, res){
 });
 
 
-//Update One in the DB
+//Update Note in the DB
 app.post('/update/:id', function(req, res) {
-	db.notes.update({'_id': mongojs.ObjectId(req.params.id)},
-		{ $set:
+	Note.update({'_id': req.params.id},
 			{
 				'title': req.body.title,
 				'note': req.body.note
-			}
-		}, function(err, found) {
-			if (err) {
-					res.send(err);
-			} else {
-					console.log('inside update, found: ', found);
-					res.send(found);
-			}
+			}, function(err, found) {
+
+				if (err) {
+						res.send(err);
+				} else {
+						console.log('inside update, found: ', found);
+						res.send(found);
+				}
 
 	});
 });
@@ -139,23 +149,22 @@ app.post('/update/:id', function(req, res) {
 app.get('/delete/:id', function(req, res) {
 
 	console.log(req.params.id);
- 	db.notes.remove({
- 			'_id': mongojs.ObjectId(req.params.id)
- 	}, function(err, found){
- 			if (err) {
- 					console.log(err);
- 					res.send(err);
- 			} else {
- 					console.log(found);
- 					res.send(found);
- 			}
- 	});
+
+	Note.find({'_id': req.params.id}).remove().exec(function(err, found){
+		if (err) {
+				console.log(err);
+				res.send(err);
+		} else {
+				console.log('removed');
+				res.send('found and removed');
+		}
+	});
 });
 
 
 //Clear the DB
 app.get('/clearall', function(req, res) {
- 	db.smashing.remove({
+ 	db.articles.remove({
  			'_id': mongojs.ObjectId(err, saved)
  	}, function(err, found){
  			if (err) {

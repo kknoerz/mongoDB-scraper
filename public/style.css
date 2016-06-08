@@ -64,11 +64,7 @@ h1 {
 
 
 .deleter{
-  cursor: pinter;
-  text-align:right;
-}
-
-.deleter{
+  cursor: pointer;
   color: red;
   margin-left: 20px;
 }

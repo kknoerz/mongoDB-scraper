@@ -13,15 +13,20 @@ function getNotes(){
   });
 }
 
+function initScrape() {
+  $.getJSON('/scrape', function(){});
+}
+
 $(document).ready(function(){
+  initScrape();
   getNotes();
-})
+});
 
 
 $(document).on('click', '#get-smashed', function(){
   function getResults(){
     $('#results').empty();
-    $.getJSON('/all', function(data) {
+    $.getJSON('/articles', function(data) {
       for (var i = 0; i<data.length; i++){
         // debugger;
         var content = data[i].content;
