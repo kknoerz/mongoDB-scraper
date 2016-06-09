@@ -54,7 +54,7 @@ $(document).on('click', '#back', function(){
 
 
 
-$(document).on('click', '#makenew' function(){
+$(document).on('click', '#makenew', function(){
   $.ajax({
     type: "POST",
     dataType: "json",
@@ -69,10 +69,11 @@ $(document).on('click', '#makenew' function(){
   })
   .done(function(){
     getNotes();
+    goBack();
   });
 });
 
-$(document).on('click', '#clearall' function(){
+$(document).on('click', '#clearalln', function(){
   $.ajax({
     type: "GET",
     dataType: "json",
@@ -131,6 +132,7 @@ $(document).on('click', '#updater', function(){
       $('#note').val("");
       $('#title').val("");
       $('#actionbutton').html('<button id="makenew">Submit</button>');
+      goBack();
     }
   });
 });
