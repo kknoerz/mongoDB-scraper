@@ -54,7 +54,7 @@ $(document).on('click', '#back', function(){
 
 
 
-$('#makenew').on('click', function(){
+$(document).on('click', '#makenew' function(){
   $.ajax({
     type: "POST",
     dataType: "json",
@@ -72,7 +72,7 @@ $('#makenew').on('click', function(){
   });
 });
 
-$('#clearall').on('click', function(){
+$(document).on('click', '#clearall' function(){
   $.ajax({
     type: "GET",
     dataType: "json",
