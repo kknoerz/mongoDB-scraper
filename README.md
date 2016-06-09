@@ -15,7 +15,7 @@
 
 * Selecting an article will expand the content window and reveal the article body. It will also display the title in the note pad placed in the center on of the screen.
 
-[![See video at: https://youtu.be/OsA_irHC2bA](http://img.youtube.com/vi/OsA_irHC2bA/0.jpg)](https://www.youtube.com/watch?v=OsA_irHC2bA&feature=youtu.be)
+[test](https://github.com/kknoerz/mongoDB-scraper/blob/master/public/images/smashing_one.gif)
 
 * To create a note, simply title your note and write your note in the body of the notepad.
 
