@@ -111,9 +111,7 @@ app.get('/articles', function(req, res) {
 app.get('/find/:id', function(req, res){
 
 	console.log(req.params.id);
-	Note.findOne({
-			'_id': mongojs.ObjectId(req.params.id)
-	}, function(err, found){
+	Note.findOne({'_id': req.params.id}, function(err, found){
 			if (err) {
 					console.log(err);
 					res.send(err);
@@ -128,10 +126,11 @@ app.get('/find/:id', function(req, res){
 
 //Update Note in the DB
 app.post('/update/:id', function(req, res) {
+
 	Note.update({'_id': req.params.id},
 			{
 				'title': req.body.title,
-				'note': req.body.note
+				'note': req.body.note,
 			}, function(err, found) {
 
 				if (err) {

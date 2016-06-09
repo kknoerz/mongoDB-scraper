@@ -13,8 +13,29 @@ function getNotes(){
   });
 }
 
+function getResults(){
+  $('#results').empty();
+  $.getJSON('/articles', function(data) {
+    for (var i = 0; i<data.length; i++){
+      // debugger;
+      var content = data[i].content;
+      var findLink = content.replace(/Read More...$/g, ' ');//Why isn't this working!!!?!?!
+      $('#results').append('<div class="smashing-article" data-id=' +data[i]._id+ '>' + '<h1 class="smashing-title">' +data[i].title+ '</h1>' + '<p class="smashing-content" data-id=smashing-'+i+'>' + findLink + '<span id=smashing-link'+i+'></span><span id=back>X</span></p></div>');
+      $('#smashing-link'+i).append('<a href="' +data[i].link+ '" target="_blank">Read More');
+    }
+  });
+}
+
 function initScrape() {
   $.getJSON('/scrape', function(){});
+}
+
+function goBack(){
+  getResults();
+  $('#article').empty();
+  $('#title').val('');
+  $('#note').val('');
+  $('#actionbutton').html('<button id="makenew">Submit</button>');
 }
 
 $(document).ready(function(){
@@ -24,22 +45,13 @@ $(document).ready(function(){
 
 
 $(document).on('click', '#get-smashed', function(){
-  function getResults(){
-    $('#results').empty();
-    $.getJSON('/articles', function(data) {
-      for (var i = 0; i<data.length; i++){
-        // debugger;
-        var content = data[i].content;
-        var findLink = content.replace(/Read more...$/g, ' ');//Why isn't this working!!!?!?!
-        // console.log('content: ', content);
-        // console.log('findLink: ', findLink);
-        $('#results').append('<div class="smashing-article" data-id=' +data[i]._id+ '>' + '<h1 class="smashing-title">' +data[i].title+ '</h1>' + '<p class="smashing-content" data-id=smashing-'+i+'>' + findLink + '<span id=smashing-link'+i+'></span><span class=deleter>X</span></p></div>');
-        $('#smashing-link'+i).append('<a href="' +data[i].link+ '" target="_blank">Read More');
-      }
-    });
-  }
   getResults();
 });
+
+$(document).on('click', '#back', function(){
+  goBack();
+});
+
 
 
 $('#makenew').on('click', function(){
@@ -51,6 +63,7 @@ $('#makenew').on('click', function(){
       article: $('#article').text(),
       title: $('#title').val(),
       note: $('#note').val(),
+      body: $('.current').text(),
       created: Date.now()
     }
   })
@@ -72,6 +85,7 @@ $('#clearall').on('click', function(){
 });
 
 $(document).on('click', '.deleter', function(){
+
   var selected = $(this).parent();
   $.ajax({
     type: "GET",
@@ -90,6 +104,10 @@ $(document).on('click', '#dataentry', function(){
     type: "GET",
     url: '/find/' + selected.data('id'),
     success: function(data){
+      $('#results').empty();
+      data.body = data.body.replace('Read MoreX', '')
+      $('#results').append($('<p class="smashing-article">').text(data.body));
+      $('#results').append($('<button>').attr('id', 'back').html('back'));
       $('#article').text(data.article);
       $('#note').val(data.note);
       $('#title').val(data.title);
@@ -100,7 +118,7 @@ $(document).on('click', '#dataentry', function(){
 
 $(document).on('click', '#updater', function(){
   var selected = $(this);
-  console.log(selected);
+  // console.log(selected);
   $.ajax({
     type: "POST",
     url: '/update/' + selected.data('id'),
@@ -121,11 +139,17 @@ $(document).on('click', '.smashing-article', function(){
 
   $('#article').text('');
   $('#article').text($(this).children('h1.smashing-title').text());
+
+  // $('#results').text('');
   var selected = $(this).children('p.smashing-content');
+  // $('#results').append($('<div class=.smashing-article>').text(selected));
   if($(selected).css('display') == 'none') {
     $(selected).css('display', 'unset');
+    $(selected).addClass('current');
   }else{
+    $(selected).removeClass('current');
     $(selected).css('display', 'none');
+
   }
 
 });

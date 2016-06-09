@@ -63,7 +63,7 @@ h1 {
 }
 
 
-.deleter{
+.deleter, span#back{
   cursor: pointer;
   color: red;
   margin-left: 20px;
