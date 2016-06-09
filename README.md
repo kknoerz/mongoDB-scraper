@@ -15,7 +15,9 @@
 
 * Selecting an article will expand the content window and reveal the article body. It will also display the title in the note pad placed in the center on of the screen.
 
-[(http://img.youtube.com/vi/OsA_irHC2bA/0.jpg)](http://www.youtube.com/watch?v=OsA_irHC2bA)
+[![See video here](http://img.youtube.com/vi/OsA_irHC2bA/0.jpg)](http://www.youtube.com/watch?v=OsA_irHC2bA)
+<!-- [![Alt text for your video](http://img.youtube.com/vi/T-D1KVIuvjA/0.jpg)](http://www.youtube.com/watch?v=T-D1KVIuvjA) -->
+
 
 * To create a note, simply title your note and write your note in the body of the notepad.
 
