@@ -15,12 +15,12 @@
 
 * Selecting an article will expand the content window and reveal the article body. It will also display the title in the note pad placed in the center on of the screen.
 
-###Click image for HD version
+##### Click image for HD version
 [![Screen View](http://share.gifyoutube.com/gJExWl.gif)](https://www.youtube.com/watch?v=OsA_irHC2bA)
 
 * To create a note, simply title your note and write your note in the body of the notepad.
 
-###Click image for HD version
+##### Click image for HD version
 [![Screen View](http://share.gifyoutube.com/0R72kV.gif)](https://www.youtube.com/watch?v=HbjFXeACgq8)
 
 * Notes are saved by pressing the submit button and are displayed on the right-most column in the note bin.
@@ -29,5 +29,5 @@
 
 * The current note is retrieved to the note pad. The article content is also  made available.
 
-###Click image for HD version
+##### Click image for HD version
 [![Screen View](http://share.gifyoutube.com/YEmQPW.gif)](https://www.youtube.com/watch?v=IyNnTKXP1Yk)
