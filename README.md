@@ -15,7 +15,9 @@
 
 * Selecting an article will expand the content window and reveal the article body. It will also display the title in the note pad placed in the center on of the screen.
 
-[](https://gifs.com/gif/gJExWl)
+<!-- [](https://gifs.com/gif/gJExWl) -->
+[![Screen View](https://gifs.com/gif/gJExWl)](https://www.youtube.com/watch?v=OsA_irHC2bA)
+
 <!-- https://gifs.com/gif/gJExWl -->
 <!-- [![Alt text for your video](http://img.youtube.com/vi/T-D1KVIuvjA/0.jpg)](http://www.youtube.com/watch?v=T-D1KVIuvjA) -->
 
