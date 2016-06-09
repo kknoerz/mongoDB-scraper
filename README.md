@@ -15,7 +15,7 @@
 
 * Selecting an article will expand the content window and reveal the article body. It will also display the title in the note pad placed in the center on of the screen.
 
-![video screen](smashing_one.gif)
+![video screen](/public/images/smashing_one.gif)
 
 * To create a note, simply title your note and write your note in the body of the notepad.
 
