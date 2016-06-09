@@ -9,11 +9,13 @@
 
 ### Usage
 
-* To use this app, Press the Smashing Magazine button to create an initial scrape of today's articles currently on [SmashingMagazine.com](https://smashingmagazine.com/).
+* To use this app, press the Smashing Magazine button to create an initial scrape of today's articles currently on [SmashingMagazine.com](https://smashingmagazine.com/).
 
 * Select an article by hovering and clicking the title of the article.
 
 * Selecting an article will expand the content window and reveal the article body. It will also display the title in the note pad placed in the center on of the screen.
+
+[![See video at: https://youtu.be/OsA_irHC2bA](http://img.youtube.com/vi/OsA_irHC2bA/0.jpg)](https://www.youtube.com/watch?v=OsA_irHC2bA&feature=youtu.be)
 
 * To create a note, simply title your note and write your note in the body of the notepad.
 
